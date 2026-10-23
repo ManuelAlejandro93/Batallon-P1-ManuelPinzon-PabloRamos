@@ -4,7 +4,7 @@ public class Blindado extends Vehiculo {
     private int nivelBlindaje;
 
     public Blindado(String id, String modelo, int anioFabricacion, double kilometraje,
-                    EstadoOperativo estadoOperativo, int nivelBlindaje) {
+            EstadoOperativo estadoOperativo, int nivelBlindaje) {
         super(id, modelo, anioFabricacion, kilometraje, estadoOperativo);
         this.nivelBlindaje = nivelBlindaje;
     }

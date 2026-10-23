@@ -10,78 +10,96 @@ class BatallonTest {
 
     private static final Logger LOG = Logger.getLogger(BatallonTest.class.getName());
 
-    @DisplayName("Prueba assertEquals")
+    // 1.
+    // Validar la
+    // creación de
+    // los diferentes
+    // tipos de
+    // vehículos
+    // Verificar
+    // que al
+    // crear objetos
+    // de tipo TransporteTropas,
+    // VehiculoBlindado y VehiculoApoyo,
+    // sus atributos
+    // generales y
+    // particulares se
+    // almacenen correctamente
+    // y puedan
+    // recuperarse mediante
+    // sus funciones
+    // de consulta.
     @Test
-    void testInicial(){
-        LOG.info("Iniciando prueba Batallon...");
+    void prueba1() {
 
-        int resultado = 1 + 2;
+        // String id, String modelo, int anioFabricacion, double kilometraje,
+        // EstadoOperativo estadoOperativo, int capacidadSoldados
+        String idMock = "VehiculoTopas1";
+        String modeloMock = "SovieticoAsesino";
+        int anioMock = 2026;
+        double kilometrajeMock = 0;
+        int capacidadMock = 500;
+        EstadoOperativo estadoMock = EstadoOperativo.DISPONIBLE;
 
-        assertEquals(3,resultado);
+        TransporteTropas vehiculoTropas1 = new TransporteTropas(idMock, modeloMock, anioMock, kilometrajeMock,
+                estadoMock, capacidadMock);
 
-        LOG.info("Finalizando prueba Batallon...");
+        String idReal = vehiculoTropas1.id;
+        String modeloReal = vehiculoTropas1.modelo;
+        int anioReal = vehiculoTropas1.anioFabricacion;
+        double kilometrajeReal = vehiculoTropas1.kilometraje;
+        int capacidadReal = vehiculoTropas1.getCapacidadSoldados();
+
+        Assertions.assertEquals("VehiculoTopas1", idReal);
+        Assertions.assertEquals("SovieticoAsesino", modeloReal);
+        Assertions.assertEquals(2026, anioReal);
+        Assertions.assertEquals(0, 0);
+        Assertions.assertEquals(500, 500);
+
+        // String id, String modelo, int anioFabricacion, double kilometraje,
+        // EstadoOperativo estadoOperativo, int nivelBlindaje
+
+        String idMock2 = "VehiculoBlindado1";
+        String modeloMock2 = "SovieticoAsesino";
+        int anioMock2 = 2026;
+        double kilometrajeMock2 = 0;
+        EstadoOperativo estadoMock2 = EstadoOperativo.DISPONIBLE;
+        int blindajeMock2 = 1;
+
+        Blindado blindado1 = new Blindado(idMock2, modeloMock2, anioMock2, kilometrajeMock2, estadoMock,
+                blindajeMock2);
+
+        String idReal2 = blindado1.id;
+        String modeloReal2 = blindado1.modelo;
+        int anioReal2 = blindado1.anioFabricacion;
+        double kilometrajeReal2 = blindado1.kilometraje;
+        double blindajeReal2 = blindado1.getNivelBlindaje();
+
+        Assertions.assertEquals(idMock2, idReal2);
+        Assertions.assertEquals(modeloMock2, modeloReal2);
+        Assertions.assertEquals(anioMock2, anioReal2);
+        Assertions.assertEquals(kilometrajeMock2, kilometrajeReal2);
+        Assertions.assertEquals(blindajeMock2, blindajeReal2);
+
+        String idMock3 = "VehiculoTopas1";
+        String modeloMock3 = "SovieticoAsesino";
+        int anioMock3 = 2026;
+        double kilometrajeMock3 = 0;
+        EstadoOperativo estadoMock3 = EstadoOperativo.DISPONIBLE;
+        TipoFuncion tipoFuncionMock3 = TipoFuncion.COMUNICACIONES;
+
+        Apoyo apoyo1 = new Apoyo(idMock3, modeloMock3, anioMock3, kilometrajeMock3, estadoMock3, tipoFuncionMock3);
+
+        String idReal3 = apoyo1.id;
+        String modeloReal3 = apoyo1.modelo;
+        int anioReal3 = apoyo1.anioFabricacion;
+        double kilometrajeReal3 = apoyo1.kilometraje;
+        TipoFuncion funcionReal3 = apoyo1.getTipoFuncion();
+
+        Assertions.assertEquals(idMock3, idReal3);
+        Assertions.assertEquals(modeloMock3, modeloReal3);
+        Assertions.assertEquals(anioMock3, anioReal3);
+        Assertions.assertEquals(kilometrajeMock3, kilometrajeReal3);
+        Assertions.assertEquals(tipoFuncionMock3, funcionReal3);
     }
-
-    @DisplayName("Prueba assertNotEquals")
-    @Test
-    void testNotEquals(){
-        LOG.info("Iniciando prueba Batallon...");
-
-        String cadena = "Hola a todos";
-
-        assertNotEquals("Adios",cadena);
-
-        LOG.info("Finalizando prueba Batallon...");
-    }
-
-    @DisplayName("Prueba assertNull")
-    @Test
-    void testNull(){
-        LOG.info("Iniciando prueba Batallon...");
-
-        Batallon batallon = null;
-
-        assertNull(batallon);
-
-        LOG.info("Finalizando prueba Batallon...");
-    }
-
-    @DisplayName("Prueba assertNotNull")
-    @Test
-    void testNotNull(){
-        LOG.info("Iniciando prueba Batallon...");
-
-        Batallon batallon = new Batallon("01", "Cacique", "03", "Calarca", 3);
-
-        assertNotNull(batallon);
-
-        LOG.info(batallon.toString());
-        LOG.info("Finalizando prueba Batallon...");
-    }
-
-    @DisplayName("Prueba assertTrue/assertFalse")
-    @Test
-    void testFalseTrue(){
-        LOG.info("Iniciando prueba Batallon...");
-
-        Batallon batallon = new Batallon("01", "Cacique", "03", "Calarca", 3);
-
-        assertTrue(batallon.getNumero() < 5);
-        assertFalse(batallon.getNombre().equals("Calarca cacique"));
-
-        LOG.info(batallon.toString());
-        LOG.info("Finalizando prueba Batallon...");
-    }
-
-
-    //@BeforeEach
-    void ejecutarAntes(){
-        LOG.warning("Ejecucion del BeforeEach");
-    }
-
-//    @AfterEach
-    void ejecutarDespues(){
-        LOG.warning("Ejecucion del AfterEach");
-    }
-
 }
