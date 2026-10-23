@@ -129,5 +129,20 @@ class BatallonTest {
         // Verificar que el sistema permita modificar el kilometraje y estado operativo
         // de un vehículo previamente registrado y que los nuevos valores queden
         // almacenados correctamente.
+
+        Batallon batallonMock = new Batallon("01", "Cacique", "03", "Calarcá", 3);
+
+        TransporteTropas transporteMock = new TransporteTropas("T-01", "Camión de tropas", 2020,
+                12000, EstadoOperativo.DISPONIBLE, 25);
+
+        batallonMock.registrarVehiculo(transporteMock);
+
+        Vehiculo transporteReal = batallonMock.buscarVehiculo("T-01");
+
+        transporteReal.setKilometraje(100);
+        transporteReal.setEstadoOperativo(EstadoOperativo.EN_MANTENIMIENTO);
+
+        Assertions.assertEquals(100, transporteReal.getKilometraje());
+        Assertions.assertEquals(EstadoOperativo.EN_MANTENIMIENTO, transporteReal.getEstadoOperativo());
     }
 }

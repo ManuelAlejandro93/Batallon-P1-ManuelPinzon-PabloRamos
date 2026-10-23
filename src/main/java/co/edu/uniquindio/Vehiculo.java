@@ -12,7 +12,7 @@ public abstract class Vehiculo {
     protected ArrayList<DetalleMision> listaDetallesMision;
 
     public Vehiculo(String id, String modelo, int anioFabricacion, double kilometraje,
-                    EstadoOperativo estadoOperativo) {
+            EstadoOperativo estadoOperativo) {
         if (id == null) {
             this.id = "";
         } else {
@@ -96,15 +96,11 @@ public abstract class Vehiculo {
     }
 
     public boolean setKilometraje(double kilometraje) {
-        boolean actualizado = Double.isFinite(kilometraje) && kilometraje >= 0
-                && estadoOperativo != EstadoOperativo.EN_MISION;
-        if (kilometraje < this.kilometraje) {
-            actualizado = false;
+        if (kilometraje < 0) {
+            return false;
         }
-        if (actualizado) {
-            this.kilometraje = kilometraje;
-        }
-        return actualizado;
+        this.kilometraje = kilometraje;
+        return true;
     }
 
     public EstadoOperativo getEstadoOperativo() {
