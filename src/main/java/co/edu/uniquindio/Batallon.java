@@ -138,6 +138,16 @@ public class Batallon {
         return new ArrayList<>(listaMision);
     }
 
+    public ArrayList<Mision> obtenerMisionesCompletadas() {
+        ArrayList<Mision> completadas = new ArrayList<>();
+        for (Mision mision : listaMision) {
+            if (mision.getEstado() == EstadoMision.COMPLETADA) {
+                completadas.add(mision);
+            }
+        }
+        return completadas;
+    }
+
     public String getCodigo() {
         return codigo;
     }
@@ -176,6 +186,35 @@ public class Batallon {
 
     public void setNumero(int numero) {
         this.numero = numero;
+    }
+
+    public boolean eliminarVehiculo(String id) {
+        boolean esEliminado = false;
+        Vehiculo vehiculoEliminado = buscarVehiculo(id);
+
+        if (vehiculoEliminado != null && vehiculoEliminado.estadoOperativo == EstadoOperativo.DISPONIBLE) {
+
+            boolean asociadoAMision = false;
+            for (Mision mision : listaMision) {
+                for (DetalleMision detalle : mision.getListaDetallesMision()) {
+                    if (detalle.getVehiculo() != null
+                            && detalle.getVehiculo().getId().equals(vehiculoEliminado.getId())) {
+                        asociadoAMision = true;
+                        break;
+                    }
+                }
+                if (asociadoAMision) {
+                    break;
+                }
+            }
+
+            if (!asociadoAMision) {
+                listaVehiculos.remove(vehiculoEliminado);
+                esEliminado = true;
+            }
+        }
+
+        return esEliminado;
     }
 
     @Override

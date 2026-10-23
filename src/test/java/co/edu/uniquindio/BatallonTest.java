@@ -145,4 +145,65 @@ class BatallonTest {
         Assertions.assertEquals(100, transporteReal.getKilometraje());
         Assertions.assertEquals(EstadoOperativo.EN_MANTENIMIENTO, transporteReal.getEstadoOperativo());
     }
+
+    @Test
+    void prueba2() {
+        // Batallon de prueba
+        Batallon batallon = new Batallon("123", "Batallon 1", "Tercera", "Quinto", 1);
+
+        // Informacion de vehiculos para la prueba
+        TransporteTropas transporte = new TransporteTropas("T-01", "Camión de tropas", 2020,
+                12000, EstadoOperativo.DISPONIBLE, 25);
+        Blindado blindado = new Blindado("B-01", "Vehículo blindado", 2021,
+                8000, EstadoOperativo.DISPONIBLE, 4);
+        Apoyo apoyo = new Apoyo("A-01", "Ambulancia", 2022,
+                5000, EstadoOperativo.DISPONIBLE, TipoFuncion.MEDICO);
+
+        batallon.registrarVehiculo(transporte);
+        Vehiculo transporteReal = batallon.buscarVehiculo("T-01");
+
+        batallon.registrarVehiculo(blindado);
+        Vehiculo blindadoReal = batallon.buscarVehiculo("B-01");
+
+        batallon.registrarVehiculo(apoyo);
+        Vehiculo apoyoReal = batallon.buscarVehiculo("A-01");
+
+        // Equals
+        assertEquals(transporte, transporteReal);
+        assertEquals(blindado, blindadoReal);
+        assertEquals(apoyo, apoyoReal);
+
+    }
+
+    @Test
+    void prueba3() {
+        Batallon batallon = new Batallon("123", "Batallon 1", "Tercera", "Quinto", 1);
+
+        TransporteTropas transporte1 = new TransporteTropas("Vehiculo_001", "Camión de tropas", 2020,
+                12000, EstadoOperativo.DISPONIBLE, 25);
+        Blindado blindado1 = new Blindado("Vehiculo_001", "Vehículo blindado", 2021,
+                8000, EstadoOperativo.DISPONIBLE, 4);
+
+        batallon.registrarVehiculo(transporte1);
+        boolean registroRepetido = batallon.registrarVehiculo(blindado1);
+
+        assertFalse(registroRepetido);
+    }
+
+    @Test
+    void prueba5() {
+        Batallon batallon = new Batallon("123", "Batallon 1", "Tercera", "Quinto", 1);
+
+        TransporteTropas transporte = new TransporteTropas("T-01", "Camión de tropas", 2020,
+                12000, EstadoOperativo.DISPONIBLE, 25);
+
+        batallon.registrarVehiculo(transporte);
+
+        boolean vehiculoEliminado = batallon.eliminarVehiculo("T-01");
+        assertTrue(vehiculoEliminado);
+
+        Vehiculo vehiculoEncontrado = batallon.buscarVehiculo("T-01");
+        assertNull(vehiculoEncontrado);
+    }
+
 }
