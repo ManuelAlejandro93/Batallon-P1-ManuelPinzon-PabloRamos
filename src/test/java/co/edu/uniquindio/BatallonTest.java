@@ -102,4 +102,32 @@ class BatallonTest {
         Assertions.assertEquals(kilometrajeMock3, kilometrajeReal3);
         Assertions.assertEquals(tipoFuncionMock3, funcionReal3);
     }
+
+    @Test
+    void prueba4() {
+        // Comprobar que el sistema permita consultar correctamente un vehículo
+        // registrado utilizando su ID. También debe verificarse que la consulta de un
+        // ID inexistente produzca el resultado definido para ese caso.
+
+        Batallon batallonMock = new Batallon("01", "Cacique", "03", "Calarcá", 3);
+
+        TransporteTropas transporteMock = new TransporteTropas("T-01", "Camión de tropas", 2020,
+                12000, EstadoOperativo.DISPONIBLE, 25);
+
+        batallonMock.registrarVehiculo(transporteMock);
+
+        String idReal = batallonMock.buscarVehiculo("T-01").id;
+
+        Assertions.assertEquals(transporteMock.id, idReal);
+        Assertions.assertNull(batallonMock.buscarVehiculo("666"));
+
+    }
+
+    @Test
+    void Prueba6() {
+        // 6. Actualizar correctamente la información de un vehículo
+        // Verificar que el sistema permita modificar el kilometraje y estado operativo
+        // de un vehículo previamente registrado y que los nuevos valores queden
+        // almacenados correctamente.
+    }
 }
